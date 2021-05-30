@@ -131,16 +131,15 @@ class GUI:
             if i%3 == 0:
                 image_counter_options.append(i)
 
-        variable = tk.StringVar(self.root)
-        imageCountOptions = ttk.OptionMenu(self.root, variable,
+        self.variable = tk.StringVar(self.root)
+        imageCountOptions = ttk.OptionMenu(self.root, self.variable,
                                     "12",
-                                    *image_counter_options,
-                                    command=self.getImageCount)
+                                    *image_counter_options)
         imageCountOptions.pack()
         imageCountOptions.place(x=165, y=200)
 
-    def getImageCount(self, value=0):
-        self.image_count = int(value)
+    def getImageCount(self):
+        return int(self.variable.get())
 
     def setBGColor(self):
         bg_color_label = tk.Label(self.root, text="Background color", bg="white")
@@ -222,7 +221,8 @@ class GUI:
                         custom_text=self.custom_text,
                         font_dir='',
                         bg_colour=self.bg_color,
-                        font_colour=self.font_color
+                        font_colour=self.font_color,
+                        images=self.getImageCount()
                         )
         app.run()
         self.output_image(self.filename[:-3] + "png")
