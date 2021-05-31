@@ -226,5 +226,5 @@ class GUI:
                         image_quality=self.image_quality
                         )
         app.run()
-        self.output_image(self.filename[:-3] + "png")
-        self.log("Thumbnail saved in: " + self.filename[:-3] + "png")
+        self.output_image(self.filename[:-3] + "jpg")
+        self.log("Thumbnail saved in: " + self.filename[:-3] + "jpg")
