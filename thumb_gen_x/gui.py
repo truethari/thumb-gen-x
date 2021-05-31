@@ -93,6 +93,7 @@ class GUI:
 
     def getCustomTextInput(self):
         self.custom_text = self.custom_text_area.get("1.0","end")
+        return self.custom_text
 
     def setImageQuality(self):
         image_quality_label = tk.Label(self.root, text="Image quality")
@@ -214,17 +215,22 @@ class GUI:
             t_image.place(x=500, y=5)
 
     def run(self):
-        if self.getCustomTextInput() == "":
-            self.custom_text = str(True)
-        self.log("Processing: " + self.filename)
-        app = Generator(video_path=self.filename,
-                        custom_text=self.custom_text,
-                        font_dir='',
-                        bg_colour=self.bg_color,
-                        font_colour=self.font_color,
-                        images=self.getImageCount(),
-                        image_quality=self.image_quality
-                        )
-        app.run()
-        self.output_image(self.filename[:-3] + "jpg")
-        self.log("Thumbnail saved in: " + self.filename[:-3] + "jpg")
+        if self.filename == "No file selected":
+            self.log("Please select a video before run!")
+        elif not self.filename.endswith(".mkv") and not self.filename.endswith(".mp4"):
+            self.log("This file type is not supported.")
+        else:
+            if self.getCustomTextInput() == "":
+                self.custom_text = str(True)
+            self.log("Processing: " + self.filename)
+            app = Generator(video_path=self.filename,
+                            custom_text=self.custom_text,
+                            font_dir='',
+                            bg_colour=self.bg_color,
+                            font_colour=self.font_color,
+                            images=self.getImageCount(),
+                            image_quality=self.image_quality
+                            )
+            app.run()
+            self.output_image(self.filename[:-3] + "jpg")
+            self.log("Thumbnail saved in: " + self.filename[:-3] + "jpg")
