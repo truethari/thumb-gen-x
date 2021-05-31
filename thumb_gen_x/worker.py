@@ -3,8 +3,10 @@ import re
 import tempfile
 
 class Generator:
-    def __init__(self, video_path, output_path='', custom_text='True', font_dir='', font_size=0, bg_colour='', font_colour='', images=12):
+    def __init__(self, video_path, output_path='', custom_text='True', font_dir='',
+                 font_size=0, bg_colour='', font_colour='', images=12, image_quality=100):
         from .utils import listToString
+
         self.video_path = video_path
 
         if output_path == '':
@@ -27,6 +29,7 @@ class Generator:
         self.bg_colour = bg_colour
         self.font_colour = font_colour
         self.images = images
+        self.image_quality = image_quality
 
         self.temp_dir = tempfile.TemporaryDirectory()
         self.secure_temp = self.temp_dir.name
@@ -42,6 +45,6 @@ class Generator:
         timestamps(self.resize_folder, self.font_dir, self.font_size, self.ss_time)
         thumb(self.video_path, self.output_path, self.resize_folder, self.secure_temp,
               self.custom_text, self.font_dir, self.font_size, self.bg_colour,
-              self.font_colour, self.images)
+              self.font_colour, self.images, self.image_quality)
 
         return True

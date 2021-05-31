@@ -14,7 +14,7 @@ class GUI:
         self.filename = None
         self.bg_color = "#000"
         self.font_color = "#fff"
-        self.default_image_quality = 85
+        self.image_quality = 100
 
         self.compose_frames()
         self.app_main()
@@ -106,10 +106,10 @@ class GUI:
                       command=self.getImageQuality)
         scl_image_quality.pack()
         scl_image_quality.place(x=10, y=200)
-        scl_image_quality.config(value=85)
+        scl_image_quality.config(value=self.image_quality)
 
         self.image_q = tk.Text(self.root, height=0, width=5, font=(0, 8))
-        self.image_q.insert(tk.END, self.default_image_quality)
+        self.image_q.insert(tk.END, self.image_quality)
         self.image_q.pack()
         self.image_q.place(x=112, y=203)
         self.image_q.config(state=tk.DISABLED)
@@ -222,7 +222,8 @@ class GUI:
                         font_dir='',
                         bg_colour=self.bg_color,
                         font_colour=self.font_color,
-                        images=self.getImageCount()
+                        images=self.getImageCount(),
+                        image_quality=self.image_quality
                         )
         app.run()
         self.output_image(self.filename[:-3] + "png")
